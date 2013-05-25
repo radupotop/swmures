@@ -12,20 +12,21 @@ function GetTags() {
      * Get data & tags from JSON
      */
     function getTags() {
-	
-	$.getJSON('js/test-data.json').success(function(data) {
-	    
-	    $.each(data.data, function(k,v) {
-		$.each(v.tags, function(k,v) {
-		    availableTags.push(v);
-		});
-	    });
-	    
-	    $.unique(availableTags);
-	    
-	    appendTags();
-	    
-	});
+        
+        $.getJSON('/swmures/js/test-data.json').success(function(data) {
+            
+            $.each(data.data, function(k,v) {
+                $.each(v.tags, function(k,v) {
+                    availableTags.push(v);
+                });
+            });
+            
+            $.unique(availableTags);
+            
+            appendTags();
+            
+        });
+        
     }
     
     getTags();
@@ -35,11 +36,11 @@ function GetTags() {
      * Append tags to DOM
      */
     function appendTags() {
-	
-	$.each(availableTags, function(k, tag) {
-	    $('#DataTags').append('<strong class="label">'+tag+'</strong> <a href="#" class="btn btn-small" onclick="Tags.addTag(\''+tag+'\')">+</a> <a href="#" class="btn btn-small" onclick="Tags.rmTag(\''+tag+'\')">-</a><br>');
-	});
-	
+    
+        $.each(availableTags, function(k, tag) {
+            $('#DataTags').append('<strong class="label">'+tag+'</strong> <a href="#" class="btn btn-small" onclick="Tags.addTag(\''+tag+'\')">+</a> <a href="#" class="btn btn-small" onclick="Tags.rmTag(\''+tag+'\')">-</a><br>');
+        });
+    
     }
 
 
@@ -47,24 +48,25 @@ function GetTags() {
      * Add a tag
      */
     ret.addTag = function(tag) {
-	ret.selectedTags.push(tag);
-	$.unique(ret.selectedTags);
-	console.log(ret.selectedTags);
+        ret.selectedTags.push(tag);
+        $.unique(ret.selectedTags);
+        StoryTravel.setTagFilters(ret.selectedTags);
+        console.log(ret.selectedTags);
     };
     
     /**
      * Remove a tag
      */
     ret.rmTag = function(tag) {
-	ret.selectedTags = ret.selectedTags.filter(function(t){
-	    return t != tag;
-	});
-	console.log(ret.selectedTags);
+        ret.selectedTags = ret.selectedTags.filter(function(t){
+            return t != tag;
+        });
+        StoryTravel.setTagFilters(ret.selecteTags);
+        console.log(ret.selectedTags);
     };
     
     return ret;
     
 };
-
 
 var Tags = GetTags();
