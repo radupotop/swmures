@@ -43,6 +43,12 @@ var StoryTravel = StoryTravel || function(){
 	
 	function getCurrentPois(){
 		if(!currentLocation) return false;
+		if(!currentTagFilters.length){
+			currentPOIs = [];
+			currentPOIs.length = 0;
+			updateCurrentPoiMarkers();
+			return false;
+		}
 		$.ajax(
 				{
 					url : 'js/test-data.json',
@@ -140,8 +146,6 @@ var StoryTravel = StoryTravel || function(){
 		},
 		setTagFilters : function(_currentTagFilters){
 			currentTagFilters = _currentTagFilters;
-			console.log('-----');
-			console.log(_currentTagFilters);
 			if(typeof (currentTagFilters) == 'undefined'){
 				currentTagFilters = [];
 			}
