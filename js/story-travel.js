@@ -5,7 +5,7 @@ var StoryTravel = StoryTravel || function(){
 	var locationMarker = false;
 	var locUpdateHandler = null;
 	var currentBounds = null;
-	var currentTagFilters = ['art'];
+	var currentTagFilters = [];
 	var currentPOIs = [];
 	var currentPoiMarkers = [];
 	
@@ -138,15 +138,17 @@ var StoryTravel = StoryTravel || function(){
 		updateCurLocation : function(){
 			getCurLocation();
 		},
-		updateTagFilters : function(){
-			
+		setTagFilters : function(_currentTagFilters){
+			currentTagFilters = _currentTagFilters;
 		},
 		updateVisiblePois : function(){
 			getCurrentPois();
+		},
+		getTagFilters : function(){
+			return currentTagFilters;
 		}
 	};
 }();
 
 
 google.maps.event.addDomListener(window, 'load', StoryTravel.Init);
-
