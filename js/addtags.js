@@ -13,7 +13,7 @@ function GetTags() {
      */
     function getTags() {
         
-        $.getJSON('/swmures/js/test-data.json').success(function(data) {
+        $.getJSON('js/test-data.json').success(function(data) {
             
             $.each(data.data, function(k,v) {
                 $.each(v.tags, function(k,v) {

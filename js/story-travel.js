@@ -76,11 +76,11 @@ var StoryTravel = StoryTravel || function(){
 								
 								//item does not have any of the tags
 								if(!curtagfound) continue;
-								console.log('ne '+curitem['lat'] + ' ' + boundne.lat());
+								/*console.log('ne '+curitem['lat'] + ' ' + boundne.lat());
 								console.log('ne '+curitem['long']  + ' ' + boundne.lng());
 								console.log('sw '+curitem['lat'] + ' ' + boundsw.lat());
 								console.log('sw '+curitem['long']  + ' ' + boundsw.lng());
-								console.log('------------------------------');
+								console.log('------------------------------');*/
 								//test if item is within the visible area of the map window
 								if(parseFloat(curitem['lat'])  < boundne.lat() && 
 								   parseFloat(curitem['long']) < boundne.lng() &&
@@ -140,6 +140,11 @@ var StoryTravel = StoryTravel || function(){
 		},
 		setTagFilters : function(_currentTagFilters){
 			currentTagFilters = _currentTagFilters;
+			console.log('-----');
+			console.log(_currentTagFilters);
+			if(typeof (currentTagFilters) == 'undefined'){
+				currentTagFilters = [];
+			}
 			getCurrentPois();
 		},
 		updateVisiblePois : function(){
