@@ -5,6 +5,9 @@
             "lat": 46.547144,
             "long": 24.568305,
             "description": "The Petru Maior University (Romanian: Universitatea Petru Maior) of Târgu Mureş, Romania, is a university founded in 1960.",
+            "images": [
+                "img/rpetru-maior.jpg"
+            ],
             "tags": ["education", "architecture"]
         },
         {
@@ -12,6 +15,9 @@
             "lat": 46.546532,
             "long": 24.566726,
             "description": "",
+            "images": [
+                "img/rbiserica-reformata.jpg"
+            ],
             "tags": ["religion", "architecture"]
         },
         {
@@ -19,6 +25,9 @@
             "lat": 46.547343,
             "long": 24.563797,
             "description": "",
+            "images": [
+                "img/rliceul-de-arta.jpg"
+            ],
             "tags": ["education", "art"]
         },
         {
@@ -26,6 +35,9 @@
             "lat": 46.546967,
             "long": 24.566533,
             "description": "",
+            "images": [
+                "img/rcetatea-medievala-targu-mures.jpg"
+            ],
             "tags": ["history", "architecture"]
         }
     ]

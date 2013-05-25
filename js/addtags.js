@@ -40,8 +40,8 @@ function GetTags(StoryTravel) {
         });
     
     }
-
-
+    
+    
     /**
      * Add a tag
      */
