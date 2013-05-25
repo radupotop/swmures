@@ -3,6 +3,10 @@ var StoryTravel = StoryTravel || function(){
 	var mapApiKey = 'AIzaSyCo3leQTmmq4_AnjkvCi13ryx1JGkscQ-s';
 	var currentLocation = null;
 	var locationMarker = false;
+	var locUpdateHandler = null;
+	var currentBounds = null;
+	var currentTagFilters = [];
+	var currentPOIs = [];
 	
 	function getCurLocation(){
 		if(navigator.geolocation) {
@@ -12,6 +16,7 @@ var StoryTravel = StoryTravel || function(){
 
 
 		      storyMap.setCenter(currentLocation);
+		      currentBounds = storyMap.getBounds();
 		      if(!locationMarker){
 		    	  locationMarker = new google.maps.Marker({
 		    		  position: currentLocation,
@@ -21,7 +26,6 @@ var StoryTravel = StoryTravel || function(){
 		      }else{
 		    	  locationMarker.setPosition(currentLocation);
 		      }
-		      console.log(currentLocation);
 		    }, function() {
 		      handleNoGeolocation();
 		    });
@@ -29,10 +33,51 @@ var StoryTravel = StoryTravel || function(){
 		    // Browser doesn't support Geolocation
 		    handleNoGeolocation();
 		  }
+		
 	}
 	
 	function handleNoGeolocation(errorFlag){
 		alert('No Geolocation support')
+	}
+	
+	function getCurrentPois(){
+		$.ajax(
+				{
+					url : 'js/test-data.json',
+					dataType : 'json',
+					success : function(resdata){
+						if(resdata['data'].length){
+							var tempdata = resdata['data'];
+							for (var i = 0; i<tempdata.length; i++){
+								var curitem = tempdata[i];
+								var curtagfound = false;
+								
+								//test the tag existance
+								if(currentTagFilters.length){
+									//go over the itemtags
+									if(typeof(curitem['tags']) != 'object'){
+										for(var j in curitem['tags']){
+											if(jQuery.inArray(curitem['tags'][j], currentTagFilters)){
+												curtagfound = true;
+												break;
+											}
+										}
+									}
+								}else{
+									curtagfound = true;
+								}
+								
+								//item does not have any of the tags
+								if(!curtagfound) continue;
+								
+								//test if item is within the visible area of the map window
+								
+								
+							}
+						}
+					},
+				}
+		);
 	}
 	
 	return{
@@ -46,11 +91,18 @@ var StoryTravel = StoryTravel || function(){
 					mapOptions);
 			
 			getCurLocation();
-			
-			setInterval(StoryTravel.updateCurLocation, 10000);
+			getCurrentPois();
+			//if we do not have a current location here then geolocation is not awailable
+			//so no automatic update is necessary
+			//if (currentLocation){
+			//locUpdateHandler = setInterval(StoryTravel.updateCurLocation, 10000);
+			//}
 		},
 		updateCurLocation : function(){
 			getCurLocation();
+		},
+		updateTagFilters : function(){
+			
 		}
 	};
 }();
