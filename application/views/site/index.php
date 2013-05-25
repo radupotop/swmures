@@ -3,15 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<title>Story Travel</title>
-	<link rel="stylesheet" type="text/css" href="css/story-travel.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script> 
 	
-	<!-- bootstrap -->
 	<link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="js/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-	<script src="js/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/story-travel.css">
 	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script> 
+	<script src="js/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+	
 	<script type="text/javascript" src="js/story-travel.js"></script> 
 	<script type="text/javascript" src="js/addtags.js"></script> 
 </head>
