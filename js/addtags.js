@@ -61,7 +61,7 @@ function GetTags() {
         ret.selectedTags = ret.selectedTags.filter(function(t){
             return t != tag;
         });
-        StoryTravel.setTagFilters(ret.selecteTags);
+        StoryTravel.setTagFilters(ret.selectedTags);
         console.log(ret.selectedTags);
     };
     

@@ -59,6 +59,30 @@
 		border: 1px solid #CCC;
 	}
 	
+	#PoiDataContainer{
+		display: block;
+		margin: 20px 0 10px 30px;
+		float: left;
+		overflow: hidden;
+	}	
+	#PoiDataContainer h4{
+		color: #666;
+		margin: 0 0 10px 0;
+		font-size: 20px;'
+	}
+	
+	#PoiDataContainer .img{
+		width: 300px;
+		margin: 0 20px 20px 0;
+		float: left;
+	}
+	#PoiDataContainer .img img{
+		width: 100%;
+	}
+	#PoiDataContainer .poi-content{
+		font-size: 14px;
+		float: left;
+	}
 .label {
 	font-size: 16px;
 }

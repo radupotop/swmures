@@ -21,6 +21,7 @@
 	<div class="row">
 		<div id="StoryMapContainer" class="span5 well"></div>
 		<div id="DataTags" class="span4 well"></div>
+		<div id="PoiDataContainer" class="span4 well"></div>
 	</div>
 </div>
 

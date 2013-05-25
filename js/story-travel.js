@@ -23,6 +23,8 @@ var StoryTravel = StoryTravel || function(){
 		    		  position: currentLocation,
 		    		  map: storyMap,
 		    		  title: 'I am here'
+		    		  //shadow: 'http://maps.google.com/mapfiles/ms/icons/msmarker.shadow.png'
+		    		  //icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 		    	  });
 		      }else{
 		    	  locationMarker.setPosition(currentLocation);
@@ -106,6 +108,15 @@ var StoryTravel = StoryTravel || function(){
 	}
 	
 	function displayPoiData(){
+		var poidatacontainer = $('#PoiDataContainer');
+		poidatacontainer.html('');
+		poidatacontainer.append('<h4>'+currentPOIs[this.poi_index]['name']+'<\/h4>');
+		if(typeof(currentPOIs[this.poi_index]['images']) == 'object' && currentPOIs[this.poi_index]['images'].length){
+			poidatacontainer.append('<div class="img"><img src="'+currentPOIs[this.poi_index]['images'][0]+'"><\/div>');
+		}
+		if(typeof(currentPOIs[this.poi_index]['description']) == 'string' && currentPOIs[this.poi_index]['description'].length){
+			poidatacontainer.append('<div class="poi-content">'+currentPOIs[this.poi_index]['description']+'<\/div>');
+		}
 		console.log(currentPOIs[this.poi_index]);
 	}
 	
