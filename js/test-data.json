@@ -8,7 +8,25 @@
             "tags": ["education", "architecture"]
         },
         {
-            "name": ""
+            "name": "Biserica Reformata din Cetate",
+            "lat": 46.546532,
+            "long": 24.566726,
+            "description": "",
+            "tags": ["religion", "architecture"]
+        },
+        {
+            "name": "Liceul de Arta",
+            "lat": 46.547343,
+            "long": 24.563797,
+            "description": "",
+            "tags": ["education", "art"]
+        },
+        {
+            "name": "Cetatea Medievala",
+            "lat": 46.546967,
+            "long": 24.566533,
+            "description": "",
+            "tags": ["history", "architecture"]
         }
     ]
 }
