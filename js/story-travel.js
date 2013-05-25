@@ -47,7 +47,7 @@ var StoryTravel = StoryTravel || function(){
 			
 			getCurLocation();
 			
-			setInterval(StoryTravel.updateCurLocation, 10000);
+			StoryTravel.updateCurLocation;
 		},
 		updateCurLocation : function(){
 			getCurLocation();
@@ -58,3 +58,69 @@ var StoryTravel = StoryTravel || function(){
 
 google.maps.event.addDomListener(window, 'load', StoryTravel.Init);
 
+
+/**
+ * Tag manipulation: get current tags, push them to selected, pop from selected.
+ */
+function GetTags() {
+    
+    var tags = [];
+    var selectedTags = [];
+    var ret = {};
+    
+    /**
+     * Get data & tags from JSON
+     */
+    function getTags() {
+	
+	$.getJSON('/swmures/js/test-data.json').success(function(data) {
+	    
+	    $.each(data.data, function(k,v) {
+		$.each(v.tags, function(k,v) {
+		    tags.push(v);
+		});
+	    });
+	    
+	    $.unique(tags);
+	    
+	    appendTags();
+	    
+	});
+    }
+
+    getTags();
+
+
+    /**
+     * Append tags to DOM
+     */
+    function appendTags() {
+	
+	$.each(tags, function(k, tag) {
+	    $('#DataTags').append('<strong class="label">'+tag+'</strong> <a href="#" class="btn btn-small" onclick="Tags.addTag('+tag+')">+</a> <a href="#" class="btn btn-small" onclick="Tags.rmTag('+tag+')">-</a><br>');
+	});
+	
+    }
+
+
+    /**
+     * Add a tag
+     */
+    ret.addTag = function(tag) {
+	selectedTags.push(tag);
+	console.log(selectedTags);
+    }
+    
+    /**
+     * Remove a tag
+     */
+    ret.rmTag = function(tag) {
+	//~selectedTags.find();
+    }
+    
+    return ret;
+    
+};
+
+
+var Tags = GetTags(); 
