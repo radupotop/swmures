@@ -15,10 +15,13 @@
 	<script type="text/javascript" src="js/addtags.js"></script> 
 </head>
 <body>
-<h1>Story Travel</h1>
-<div id="container" class="container">
-	<div id="StoryMapContainer" class="span5"></div>
-	<div id="DataTags" class="span5"></div>
+<div id="container">
+	<h1>Story Travel</h1>
+	
+	<div class="row">
+		<div id="StoryMapContainer" class="span5 well"></div>
+		<div id="DataTags" class="span4 well"></div>
+	</div>
 </div>
 
 
