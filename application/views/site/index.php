@@ -12,6 +12,7 @@
 	
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 	<script type="text/javascript" src="js/story-travel.js"></script> 
+	<script type="text/javascript" src="js/addtags.js"></script> 
 </head>
 <body>
 <h1>Story Travel</h1>
