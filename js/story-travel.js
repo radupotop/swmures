@@ -105,6 +105,10 @@ var StoryTravel = StoryTravel || function(){
 		);
 	}
 	
+	function displayPoiData(){
+		console.log(currentPOIs[this.poi_index]);
+	}
+	
 	function updateCurrentPoiMarkers(){
 		//clear current poi markers
 		for(var i = 0; i< currentPoiMarkers.length; i++){
@@ -116,8 +120,10 @@ var StoryTravel = StoryTravel || function(){
 			var poimarker =  new google.maps.Marker({
 	    		  position: new google.maps.LatLng(currentPOIs[i]['lat'], currentPOIs[i]['long']),
 	    		  map: storyMap,
-	    		  title: currentPOIs[i]['name']
+	    		  title: currentPOIs[i]['name'],
+	    		  poi_index: i
 	    	  });
+			google.maps.event.addListener(poimarker, 'click', displayPoiData);
 			currentPoiMarkers.push(poimarker);
 		}
 		
@@ -128,7 +134,10 @@ var StoryTravel = StoryTravel || function(){
 			var mapOptions = {
 					zoom: 16,
 					center: new google.maps.LatLng(0, 0),
-					mapTypeId: google.maps.MapTypeId.ROADMAP
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					zoomControl : false,
+					streetViewControl : false,
+					panControl : false
 			};
 			storyMap = new google.maps.Map(document.getElementById('StoryMapContainer'),
 					mapOptions);

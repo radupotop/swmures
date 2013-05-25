@@ -1,7 +1,7 @@
 /**
  * Tag manipulation: get current tags, push them to selected, pop from selected.
  */
-function GetTags(StoryTravel) {
+function GetTags() {
     
     var ret = {};
     var availableTags = [];
@@ -15,8 +15,10 @@ function GetTags(StoryTravel) {
         
         $.getJSON('js/test-data.json').success(function(data) {
             
-            data.data.filter(function(v,k) {
-                availableTags = availableTags.concat(v.tags);
+            $.each(data.data, function(k,v) {
+                $.each(v.tags, function(k,v) {
+                    availableTags.push(v);
+                });
             });
             
             $.unique(availableTags);
@@ -28,8 +30,8 @@ function GetTags(StoryTravel) {
     }
     
     getTags();
-    
-    
+
+
     /**
      * Append tags to DOM
      */
@@ -40,8 +42,8 @@ function GetTags(StoryTravel) {
         });
     
     }
-    
-    
+
+
     /**
      * Add a tag
      */
@@ -59,7 +61,7 @@ function GetTags(StoryTravel) {
         ret.selectedTags = ret.selectedTags.filter(function(t){
             return t != tag;
         });
-        StoryTravel.setTagFilters(ret.selectedTags);
+        StoryTravel.setTagFilters(ret.selecteTags);
         console.log(ret.selectedTags);
     };
     
@@ -67,4 +69,4 @@ function GetTags(StoryTravel) {
     
 };
 
-var Tags = GetTags(StoryTravel);
+var Tags = GetTags();
