@@ -140,6 +140,7 @@ var StoryTravel = StoryTravel || function(){
 		},
 		setTagFilters : function(_currentTagFilters){
 			currentTagFilters = _currentTagFilters;
+			getCurrentPois();
 		},
 		updateVisiblePois : function(){
 			getCurrentPois();
