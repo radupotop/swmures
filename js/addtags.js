@@ -15,10 +15,8 @@ function GetTags(StoryTravel) {
         
         $.getJSON('js/test-data.json').success(function(data) {
             
-            $.each(data.data, function(k,v) {
-                $.each(v.tags, function(k,v) {
-                    availableTags.push(v);
-                });
+            data.data.filter(function(v,k) {
+                availableTags = availableTags.concat(v.tags);
             });
             
             $.unique(availableTags);
@@ -30,8 +28,8 @@ function GetTags(StoryTravel) {
     }
     
     getTags();
-
-
+    
+    
     /**
      * Append tags to DOM
      */
@@ -61,7 +59,7 @@ function GetTags(StoryTravel) {
         ret.selectedTags = ret.selectedTags.filter(function(t){
             return t != tag;
         });
-        StoryTravel.setTagFilters(ret.selecteTags);
+        StoryTravel.setTagFilters(ret.selectedTags);
         console.log(ret.selectedTags);
     };
     
