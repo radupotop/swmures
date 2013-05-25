@@ -36,37 +36,41 @@ function GetTags() {
      * Append tags to DOM
      */
     function appendTags() {
-    
+        
         $.each(availableTags, function(k, tag) {
-            $('#DataTags').append('<strong class="label">'+tag+'</strong> <a href="#" class="btn btn-small" onclick="Tags.addTag(\''+tag+'\')">+</a> <a href="#" class="btn btn-small" onclick="Tags.rmTag(\''+tag+'\')">-</a><br> ');
+            $('#DataTags').append(
+                '<a href="#" class="label" onclick="Tags.toggleTag(this, \''+tag+'\')">'+tag+'</a> '
+            );
         });
-    
+        
     }
 
 
     /**
-     * Add a tag
+     * Toggle a tag
      */
-    ret.addTag = function(tag) {
-        ret.selectedTags.push(tag);
-        $.unique(ret.selectedTags);
-        StoryTravel.setTagFilters(ret.selectedTags);
-        console.log(ret.selectedTags);
-    };
-    
-    /**
-     * Remove a tag
-     */
-    ret.rmTag = function(tag) {
-        ret.selectedTags = ret.selectedTags.filter(function(t){
-            return t != tag;
-        });
-        StoryTravel.setTagFilters(ret.selectedTags);
-        console.log(ret.selectedTags);
+    ret.toggleTag = function(element, tag) {
+        
+        var isSelected = $.inArray(tag, ret.selectedTags) > -1;
+        
+        if(isSelected) {
+            ret.selectedTags = ret.selectedTags.filter(function(t){
+                return t != tag;
+            });
+            StoryTravel.setTagFilters(ret.selectedTags);
+            $(element).removeClass('label-warning');
+        }
+        else {
+            ret.selectedTags.push(tag);
+            $.unique(ret.selectedTags);
+            StoryTravel.setTagFilters(ret.selectedTags);
+            $(element).addClass('label-warning');
+        }
+        
     };
     
     return ret;
     
-};
+}
 
 var Tags = GetTags();
