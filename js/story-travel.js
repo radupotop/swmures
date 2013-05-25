@@ -22,9 +22,10 @@ var StoryTravel = StoryTravel || function(){
 		    	  locationMarker = new google.maps.Marker({
 		    		  position: currentLocation,
 		    		  map: storyMap,
-		    		  title: 'I am here'
+		    		  title: 'I am here',
 		    		  //shadow: 'http://maps.google.com/mapfiles/ms/icons/msmarker.shadow.png'
 		    		  //icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+		    		  icon: 'http://maps.google.com/mapfiles/ms/icons/golfer.png'
 		    	  });
 		      }else{
 		    	  locationMarker.setPosition(currentLocation);

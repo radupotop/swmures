@@ -68,7 +68,8 @@
 	#PoiDataContainer h4{
 		color: #666;
 		margin: 0 0 10px 0;
-		font-size: 20px;'
+		font-size: 16px;
+		font-weight: normal;
 	}
 	
 	#PoiDataContainer .img{
@@ -80,7 +81,7 @@
 		width: 100%;
 	}
 	#PoiDataContainer .poi-content{
-		font-size: 14px;
+		font-size: 13px;
 		float: left;
 	}
 .label {
