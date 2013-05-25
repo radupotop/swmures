@@ -50,6 +50,7 @@ function GetTags() {
     ret.addTag = function(tag) {
         ret.selectedTags.push(tag);
         $.unique(ret.selectedTags);
+        StoryTravel.setTagFilters(ret.selectedTags);
         console.log(ret.selectedTags);
     };
     
@@ -60,12 +61,12 @@ function GetTags() {
         ret.selectedTags = ret.selectedTags.filter(function(t){
             return t != tag;
         });
+        StoryTravel.setTagFilters(ret.selecteTags);
         console.log(ret.selectedTags);
     };
     
     return ret;
     
 };
-
 
 var Tags = GetTags();
