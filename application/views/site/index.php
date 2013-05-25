@@ -7,8 +7,9 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script> 
 	
 	<!-- bootstrap -->
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+	<link href="js/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="js/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<script src="js/bootstrap/js/bootstrap.min.js"></script>
 	
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 	<script type="text/javascript" src="js/story-travel.js"></script> 
