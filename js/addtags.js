@@ -12,13 +12,13 @@ function GetTags() {
      * Get data & tags from JSON
      */
     function getTags() {
-    
+        
         $.getJSON('/swmures/js/test-data.json').success(function(data) {
             
             $.each(data.data, function(k,v) {
-            $.each(v.tags, function(k,v) {
-                availableTags.push(v);
-            });
+                $.each(v.tags, function(k,v) {
+                    availableTags.push(v);
+                });
             });
             
             $.unique(availableTags);

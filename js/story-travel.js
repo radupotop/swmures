@@ -3,8 +3,13 @@ var StoryTravel = StoryTravel || function(){
 	var mapApiKey = 'AIzaSyCo3leQTmmq4_AnjkvCi13ryx1JGkscQ-s';
 	var currentLocation = null;
 	var locationMarker = false;
+	var locUpdateHandler = null;
+	var currentBounds = null;
+	var currentTagFilters = [];
+	var currentPOIs = [];
+	var currentPoiMarkers = [];
 	
-	function getCurLocation(){
+	function getCurLocation(callaback){
 		if(navigator.geolocation) {
 		    navigator.geolocation.getCurrentPosition(function(position) {
 		    	currentLocation = new google.maps.LatLng(position.coords.latitude,
@@ -12,6 +17,7 @@ var StoryTravel = StoryTravel || function(){
 
 
 		      storyMap.setCenter(currentLocation);
+		      currentBounds = storyMap.getBounds();
 		      if(!locationMarker){
 		    	  locationMarker = new google.maps.Marker({
 		    		  position: currentLocation,
@@ -21,7 +27,6 @@ var StoryTravel = StoryTravel || function(){
 		      }else{
 		    	  locationMarker.setPosition(currentLocation);
 		      }
-		      console.log(currentLocation);
 		    }, function() {
 		      handleNoGeolocation();
 		    });
@@ -29,10 +34,87 @@ var StoryTravel = StoryTravel || function(){
 		    // Browser doesn't support Geolocation
 		    handleNoGeolocation();
 		  }
+		
 	}
 	
 	function handleNoGeolocation(errorFlag){
 		alert('No Geolocation support')
+	}
+	
+	function getCurrentPois(){
+		if(!currentLocation) return false;
+		$.ajax(
+				{
+					url : 'js/test-data.json',
+					dataType : 'json',
+					success : function(resdata){
+						currentPOIs = [];
+						currentBounds = storyMap.getBounds();
+						//debugger;
+						var boundne = currentBounds.getNorthEast();
+						var boundsw = currentBounds.getSouthWest();
+						if(resdata['data'].length){
+							var tempdata = resdata['data'];
+							for (var i = 0; i<tempdata.length; i++){
+								var curitem = tempdata[i];
+								var curtagfound = false;
+								
+								//test the tag existance
+								if(currentTagFilters.length){
+									//go over the itemtags
+									if(typeof(curitem['tags']) == 'object'){
+										for(var j in curitem['tags']){
+											if(jQuery.inArray(curitem['tags'][j], currentTagFilters)> -1){
+												curtagfound = true;
+												break;
+											}
+										}
+									}
+								}else{
+									curtagfound = true;
+								}
+								
+								//item does not have any of the tags
+								if(!curtagfound) continue;
+								console.log('ne '+curitem['lat'] + ' ' + boundne.lat());
+								console.log('ne '+curitem['long']  + ' ' + boundne.lng());
+								console.log('sw '+curitem['lat'] + ' ' + boundsw.lat());
+								console.log('sw '+curitem['long']  + ' ' + boundsw.lng());
+								console.log('------------------------------');
+								//test if item is within the visible area of the map window
+								if(parseFloat(curitem['lat'])  < boundne.lat() && 
+								   parseFloat(curitem['long']) < boundne.lng() &&
+								   parseFloat(curitem['lat']) > boundsw.lat() &&
+								   parseFloat(curitem['long']) > boundsw.lng()){
+									   currentPOIs.push(curitem);
+								   }
+								
+								//currentPOIs.push(curitem);
+							}
+						}
+						updateCurrentPoiMarkers();
+						
+					},
+				}
+		);
+	}
+	
+	function updateCurrentPoiMarkers(){
+		//clear current poi markers
+		for(var i = 0; i< currentPoiMarkers.length; i++){
+			currentPoiMarkers[i].setMap(null);
+		}
+		currentPoiMarkers = [];
+		currentPoiMarkers.length = 0;
+		for(var i = 0; i< currentPOIs.length; i++){
+			var poimarker =  new google.maps.Marker({
+	    		  position: new google.maps.LatLng(currentPOIs[i]['lat'], currentPOIs[i]['long']),
+	    		  map: storyMap,
+	    		  title: currentPOIs[i]['name']
+	    	  });
+			currentPoiMarkers.push(poimarker);
+		}
+		
 	}
 	
 	return{
@@ -47,10 +129,23 @@ var StoryTravel = StoryTravel || function(){
 			
 			getCurLocation();
 			
-			StoryTravel.updateCurLocation;
+			//if we do not have a current location here then geolocation is not awailable
+			//so no automatic update is necessary
+			//if (currentLocation){
+			//locUpdateHandler = setInterval(StoryTravel.updateCurLocation, 10000);
+			//}
 		},
 		updateCurLocation : function(){
 			getCurLocation();
+		},
+		setTagFilters : function(_currentTagFilters){
+			currentTagFilters = _currentTagFilters;
+		},
+		updateVisiblePois : function(){
+			getCurrentPois();
+		},
+		getTagFilters : function(){
+			return currentTagFilters;
 		}
 	};
 }();
