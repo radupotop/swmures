@@ -1,7 +1,7 @@
 /**
  * Tag manipulation: get current tags, push them to selected, pop from selected.
  */
-function GetTags() {
+function GetTags(StoryTravel) {
     
     var ret = {};
     var availableTags = [];
@@ -69,4 +69,4 @@ function GetTags() {
     
 };
 
-var Tags = GetTags();
+var Tags = GetTags(StoryTravel);
