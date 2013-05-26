@@ -17,7 +17,7 @@
 </head>
 <body>
 <div id="container">
-	<h1>Story Travel</h1>
+	<h1 style="padding-left: 120px; position: relative;"><div id="logo">&nbsp;</div>Story Travel</h1>
 	
 	<div class="row">
 		<div id="StoryMapContainer" class="span5 well"></div>
